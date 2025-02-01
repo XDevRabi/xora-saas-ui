@@ -1,7 +1,5 @@
 import clsx from "clsx";
 import { useState } from "react";
-import { SlideDown } from "react-slidedown";
-import "react-slidedown/lib/slidedown.css";
 
 const FaqItem = ({ item, index }) => {
   const [activeId, setActiveId] = useState(null);
@@ -12,7 +10,7 @@ const FaqItem = ({ item, index }) => {
       <div
         className="group relative flex cursor-pointer items-center justify-between gap-10 px-7"
         onClick={() => {
-          setActiveId(activeId === item.id ? null : item.id);
+          setActiveId(active ? null : item.id);
         }}
       >
         <div className="flex-1">
@@ -23,7 +21,7 @@ const FaqItem = ({ item, index }) => {
           <div
             className={clsx(
               "h6 text-p4 transition-colors duration-500 max-md:flex max-md:min-h-20 max-md:items-center",
-              active && "max-lg:text-p1",
+              active && "max-lg:text-p1"
             )}
           >
             {item.question}
@@ -40,16 +38,21 @@ const FaqItem = ({ item, index }) => {
         </div>
       </div>
 
-      <SlideDown>
-        {activeId === item.id && (
-          <div className="body-3 px-7 py-3.5">{item.answer}</div>
-        )}
-      </SlideDown>
-
+      {/* Answer Section with Smooth Animation */}
       <div
         className={clsx(
-          "g5 -bottom-7 -top-7 left-0 right-0 -z-1 rounded-3xl opacity-0 transition-opacity duration-500 absolute",
-          active && "opacity-100",
+          "faq-answer-wrapper transition-all duration-500 ease-in-out",
+          active ? "faq-answer-open" : "faq-answer-closed"
+        )}
+      >
+        <div className="body-3 px-7 py-3.5">{item.answer}</div>
+      </div>
+
+      {/* Custom background/underline */}
+      <div
+        className={clsx(
+          "g5 -bottom-7 -top-7 left-0 right-0 -z-1 rounded-3xl opacity-0 transition-opacity duration-1000 absolute",
+          active && "opacity-100"
         )}
       >
         <div className="g4 absolute inset-0.5 -z-1 rounded-3xl" />
@@ -58,4 +61,5 @@ const FaqItem = ({ item, index }) => {
     </div>
   );
 };
+
 export default FaqItem;

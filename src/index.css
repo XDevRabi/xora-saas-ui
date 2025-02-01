@@ -313,3 +313,21 @@
 
   /*  END of Footer*/
 }
+
+
+/* FAQ Answer Container */
+.faq-answer-wrapper {
+  overflow: hidden;
+  max-height: 0; /* Initially hidden */
+  opacity: 0;    /* Initially hidden */
+}
+
+.faq-answer-open {
+  max-height: 1000px; /* Adjust this based on the expected height of the content */
+  opacity: 1;
+}
+
+.faq-answer-closed {
+  max-height: 0;
+  opacity: 0;
+}
